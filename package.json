@@ -1,0 +1,37 @@
+{
+  "name": "@traveloka/react-load",
+  "version": "0.1.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "lint": "lerna run lint",
+    "test": "lerna run test",
+    "watch": "lerna run watch --parallel",
+    "publish": "npm run publish:git",
+    "publish:git": "lerna publish --conventional-commits --yes --skip-npm",
+    "publish:npm": "lerna exec npm publish --since HEAD^"
+  },
+  "dependencies": {
+    "lerna": "^3.0.0-rc.0",
+    "typescript": "^3.0.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testURL": "http://localhost"
+  },
+  "devDependencies": {
+    "@types/jest": "^23.3.1",
+    "@types/node": "^10.12.12",
+    "cz-conventional-changelog": "^2.1.0",
+    "ts-jest": "20.0.14",
+    "typescript": "^3.0.1"
+  }
+}

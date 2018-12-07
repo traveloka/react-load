@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es2015",
+    "experimentalDecorators": true,
+    "lib": ["es6", "es2017", "dom"],
+    "moduleResolution": "node",
+    "declaration": true,
+    "noLib": true,
+    "jsx": "react",
+    "allowSyntheticDefaultImports": false,
+    "removeComments": false
+  }
+}

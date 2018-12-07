@@ -1,0 +1,21 @@
+{
+  "extends": "../../tsconfig.base",
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "rootDir": "./src",
+    "outDir": "lib",
+    "module": "commonjs",
+    "target": "es5",
+    "lib": ["es6", "es2017", "dom"],
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["src/**/__tests__/*.ts", "src/**/__tests__/*.tsx"],
+  "types": ["typePatches"]
+}

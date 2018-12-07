@@ -1,0 +1,102 @@
+aliases:
+  - &restore-monorepo-cache
+    keys:
+      - dependencies-{{ checksum "yarn.lock" }}
+      - dependencies-
+
+  - &restore-packages-cache
+    keys:
+      - dependencies-packages-v1-{{ checksum "packages_checksum" }}
+      - dependencies-packages-v1-
+
+  - &save-monorepo-cache
+    paths:
+      - node_modules
+    key: dependencies-{{ checksum "yarn.lock" }}
+
+  - &save-packages-cache
+    paths:
+      - packages/react-load/node_modules
+    key: dependencies-packages-v1-{{ checksum "packages_checksum" }}
+
+defaults:
+  - &job-defaults
+    working_directory: ~/workdir
+    docker:
+      - image: circleci/node:8.11.2-jessie
+
+version: 2
+jobs:
+  setup:
+    <<: *job-defaults
+    steps:
+      - checkout
+      - attach_workspace:
+          at: ~/workdir
+
+      - run:
+          command: cat packages/*/*/yarn.lock > packages_checksum
+          name: Creating checksum file for packages/* packages
+
+      - restore_cache: *restore-monorepo-cache
+      - restore_cache: *restore-packages-cache
+
+      - run: yarn install
+      - run: yarn bootstrap
+
+      - save_cache: *save-monorepo-cache
+      - save_cache: *save-packages-cache
+
+      - persist_to_workspace:
+          root: .
+          paths: .
+
+  test:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: ~/workdir
+      - run:
+          command: yarn test:ci
+          environment:
+            JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
+      - store_test_results:
+          path: ./packages/react-load/reports/junit/
+      - run:
+          command: yarn test:html
+      - store_artifacts:
+          path: ./packages/react-load/rcoverage
+          destination: coverage
+
+  publish:
+    <<: *job-defaults
+    steps:
+      - attach_workspace:
+          at: ~/workdir
+      - run:
+          name: Authenticate with registry
+          command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+      - run: npm run publish:npm
+
+workflows:
+  version: 2
+  default-workflow:
+    jobs:
+      - setup:
+          filters:
+            tags:
+              only: /^v.*/
+      - test:
+          requires:
+            - setup
+          filters:
+            tags:
+              only: /^v.*/
+      - publish:
+          requires:
+            - test
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/

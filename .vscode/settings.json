@@ -1,0 +1,5 @@
+{
+  "eslint.workingDirectories": ["./packages/@traveloka/rps"],
+  "javascript.implicitProjectConfig.experimentalDecorators": true,
+  "editor.formatOnSave": true
+}
