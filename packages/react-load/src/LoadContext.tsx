@@ -7,7 +7,7 @@ export const initialContext: LoadState = {
   isError: false,
   error: null,
   result: null,
-  retry: () => {},
+  retry: () => {}, // tslint:disable-line
   _loadingCount: 0,
 };
 export const initialState: LoadStateByKey = {
