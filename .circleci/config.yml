@@ -57,16 +57,9 @@ jobs:
       - attach_workspace:
           at: ~/workdir
       - run:
-          command: yarn test:ci
-          environment:
-            JEST_JUNIT_OUTPUT: 'reports/junit/js-test-results.xml'
-      - store_test_results:
-          path: ./packages/react-load/reports/junit/
+          command: yarn lint
       - run:
-          command: yarn test:html
-      - store_artifacts:
-          path: ./packages/react-load/rcoverage
-          destination: coverage
+          command: yarn test
 
   publish:
     <<: *job-defaults
