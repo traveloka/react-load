@@ -35,7 +35,7 @@ jobs:
           at: ~/workdir
 
       - run:
-          command: cat packages/*/*/yarn.lock > packages_checksum
+          command: cat packages/*/yarn.lock > packages_checksum
           name: Creating checksum file for packages/* packages
 
       - restore_cache: *restore-monorepo-cache
