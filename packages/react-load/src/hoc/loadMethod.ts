@@ -28,7 +28,6 @@ export default function loadMethod(key: string = K_DEFAULT_KEY) {
               log('LOAD METHOD', 'retry');
               return retryFn.apply(this, args);
             });
-            reject(error);
           });
       });
     };

@@ -64,6 +64,15 @@ export default class UserListPage extends React.Component {
   componentDidMount() {
     return fetchUserList(); // Note: must return a Promise
   }
+
+  render() {
+    const { load: { isLoading, isError, error, retry, result} } = this.props;
+    if (isLoading) return <LoadingPage />
+    if (isError) return <ErrorPage error={error} retry={retry} />
+    return (
+      ....
+    );
+  }
 }
 ```
 
@@ -76,6 +85,15 @@ import { load, decorate } from '@traveloka/react-load';
 class UserListPage extends React.Component {
   componentDidMount() {
     return fetchUserList();
+  }
+
+  render() {
+    const { load: { isLoading, isError, error, retry, result} } = this.props;
+    if (isLoading) return <LoadingPage />
+    if (isError) return <ErrorPage error={error} retry={retry} />
+    return (
+      ....
+    );
   }
 }
 
@@ -90,13 +108,14 @@ export default load()(UserListPage);
 
 
 #### Given Props
-| Property  | Type      | Default Value | Description |
-| --------- | --------- | ------------- | ----------- |
-| isLoading | boolean   | false         |             |
-| isError   | boolean   | false         |             |
-| error     | Exception | null          |             |
-| result    | any       | null          |             |
-| retry     | function  | () => {}      |             |
+
+| Property         | Type      | Default Value | Description |
+| ---------------- | --------- | ------------- | ----------- |
+| `load.isLoading` | boolean   | false         |             |
+| `load.isError`   | boolean   | false         |             |
+| `load.error`     | Exception | null          |             |
+| `load.result`    | any       | null          |             |
+| `load.retry`     | function  | () => {}      |             |
 
 
 ## How to (not) use decorators
@@ -132,6 +151,7 @@ class Timer extends React.Component {
   }
 
   render() {
+    const { load: { isLoading, isError, error, retry, result} } = this.props;
     /* ... */
   }
 }
