@@ -1,6 +1,6 @@
 {
   "name": "@traveloka/react-load",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "react promise state management, loading, error, and success callback.",
   "main": "lib/index.js",
   "types": "./lib/index.d.ts",
