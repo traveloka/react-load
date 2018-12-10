@@ -1,6 +1,6 @@
 # React Load
 
-[![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield&circle-token=58aca08707c8f3795ed9aafb9776fa71042fada6)](https://circleci.com/gh/traveloka/react-load)
+[![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield&circle-token=ab2fa2d1fdea74636ee3132e16c82003cdc95383)](https://circleci.com/gh/traveloka/react-load)
 
 Remove boilerplate handling loading, error, and result state of Promise!
 
