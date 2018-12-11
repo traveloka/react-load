@@ -1,6 +1,6 @@
 # React Load
 
-[![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield&circle-token=ab2fa2d1fdea74636ee3132e16c82003cdc95383)](https://circleci.com/gh/traveloka/react-load)
+![NPM Version](https://badge.fury.io/js/%40traveloka%2Freact-load.svg) [![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield&circle-token=ab2fa2d1fdea74636ee3132e16c82003cdc95383)](https://circleci.com/gh/traveloka/react-load) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Remove boilerplate handling loading, error, and result state of Promise!
 
@@ -51,6 +51,9 @@ This library will give a property state before and after execution of async func
 
 
 ### Example
+
+[![Example 1](https://i.imgur.com/BHQnV3N.png)](https://codesandbox.io/s/nrn3opw66j)
+[![Example 2](https://i.imgur.com/s5YPdDB.png)](https://codesandbox.io/s/71myqxl1lx)
 
 - With decorator
 
