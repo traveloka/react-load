@@ -5,8 +5,8 @@ import log from '../utils/log';
 
 export default function loadMethod(key: string = K_DEFAULT_KEY) {
   return makeClassMemberDecorator(function decorate(decoratedFn: any) {
-    const args = arguments;
     return function decorateClassMember(this: any) {
+      const args = arguments;
       log('LOAD METHOD', 'entry');
       return new Promise((resolve, reject) => {
         if (!has(this.props, 'load')) {

@@ -35,6 +35,37 @@ describe('test load hoc', () => {
       expect(testInstance.props.load.result).toEqual('hello');
     });
   });
+  it('parameters should be corrent', () => {
+    class InnerTest extends React.Component {
+      public state: any = {
+        value: null,
+      };
+      @load()
+      public handleOnChangeText(newText: string) {
+        return new Promise(resolve => {
+          setTimeout(() => {
+            this.setState({
+              value: newText,
+            });
+            resolve('hello');
+          }, 1000);
+        });
+      }
+      public render() {
+        return null;
+      }
+    }
+
+    const Test = load()(InnerTest);
+    let testRef: any = null;
+    const rootInstance = TestRenderer.create(<Test ref={(el: any) => (testRef = el)} />).root;
+    const testInstance = rootInstance.findByType(InnerTest).instance;
+    if (testRef) {
+      testInstance.handleOnChangeText('new value');
+    }
+    jest.runAllTimers();
+    expect(testInstance.state.value).toEqual('new value');
+  });
 
   describe('test error function', () => {
     it('isLoading props should be true', () => {
