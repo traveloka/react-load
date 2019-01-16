@@ -8,7 +8,7 @@ export default function decorate(thing: any, decorators: any) {
       }
       const descriptor = Object.getOwnPropertyDescriptor(target, prop);
       const newDescriptor = propertyDecorators.reduce(
-        (accDescriptor, decorator) => decorator(target, prop, accDescriptor),
+        (accDescriptor: any, decorator: any) => decorator(target, prop, accDescriptor),
         descriptor
       );
       if (newDescriptor) Object.defineProperty(target, prop, newDescriptor);

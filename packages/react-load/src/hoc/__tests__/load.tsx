@@ -35,7 +35,8 @@ describe('test load hoc', () => {
       expect(testInstance.props.load.result).toEqual('hello');
     });
   });
-  it('parameters should be corrent', () => {
+
+  it('parameters should be correct', () => {
     class InnerTest extends React.Component {
       public state: any = {
         value: null,
