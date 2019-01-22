@@ -62,7 +62,7 @@ describe('test LoadContext', () => {
       expect(childInstance.props.load.result).toEqual(null);
     });
 
-    it('setResult should reset error and loading', async () => {
+    it('setResult should reset error and loading', () => {
       const testRenderer = TestRenderer.create(
         <LoadProvider>
           <LoadConsumer>{(loadProps: LoadContext) => <ChildComponent load={loadProps} />}</LoadConsumer>
@@ -70,7 +70,7 @@ describe('test LoadContext', () => {
       );
       const testInstance = testRenderer.root;
       const childInstance = testInstance.findByType(ChildComponent);
-      await childInstance.props.load.setResult({
+      childInstance.props.load.setResult({
         message: 'Hello world',
       });
       expect(childInstance.props.load.isLoading).toEqual(false);
@@ -81,7 +81,7 @@ describe('test LoadContext', () => {
       });
     });
 
-    it('setError should reset result and loading', async () => {
+    it('setError should reset result and loading', () => {
       const testRenderer = TestRenderer.create(
         <LoadProvider>
           <LoadConsumer>{(loadProps: LoadContext) => <ChildComponent load={loadProps} />}</LoadConsumer>
@@ -89,7 +89,7 @@ describe('test LoadContext', () => {
       );
       const testInstance = testRenderer.root;
       const childInstance = testInstance.findByType(ChildComponent);
-      await childInstance.props.load.setError('error message');
+      childInstance.props.load.setError('error message');
       expect(childInstance.props.load.isLoading).toEqual(false);
       expect(childInstance.props.load.isError).toEqual(true);
       expect(childInstance.props.load.error).toEqual('error message');
