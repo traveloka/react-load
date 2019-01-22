@@ -21,53 +21,67 @@ export default class ComponentStateProvider extends React.Component<any, LoadSta
     return <Provider value={this.getContext()}>{this.props.children}</Provider>;
   }
 
-  private setLoadingByKey = (key: string, isLoading: boolean) => {
-    if (!this.mount) return;
+  private setLoadingByKey = (key: string, isLoading: boolean): Promise<any> => {
+    if (!this.mount) return Promise.resolve();
     log('SET LOADING BY KEY', { key, isLoading });
     const loadingValue: number = isLoading ? 1 : -1;
-    this.setState((prevState: LoadStateByKey = initialState) => {
-      const loadingCount: number = prevState[key] ? prevState[key]._loadingCount : 0;
-      return {
-        ...prevState,
-        [key]: {
-          ...(prevState[key] || {}),
-          error: null,
-          result: null,
-          isError: false,
-          isLoading: loadingCount + loadingValue > 0,
-          _loadingCount: loadingCount + loadingValue,
-        },
-      };
+    return new Promise(resolve => {
+      this.setState((prevState: LoadStateByKey = initialState) => {
+        const loadingCount: number = prevState[key] ? prevState[key]._loadingCount : 0;
+        return {
+          ...prevState,
+          [key]: {
+            ...(prevState[key] || {}),
+            error: null,
+            result: null,
+            isError: false,
+            isLoading: loadingCount + loadingValue > 0,
+            _loadingCount: loadingCount + loadingValue,
+          },
+        };
+      }, resolve);
     });
   };
 
-  private setErrorByKey = (key: string, error: any, retryFn: RetryFn) => {
-    if (!this.mount) return;
-    this.setLoadingByKey(key, false);
-    this.setState((prevState: LoadStateByKey = initialState) => ({
-      ...prevState,
-      [key]: {
-        ...(prevState[key] || {}),
-        result: null,
-        isError: !!error,
-        error,
-        retry: retryFn,
-      },
-    }));
+  private setErrorByKey = (key: string, error: any, retryFn: RetryFn): Promise<any> => {
+    if (!this.mount) return Promise.resolve();
+    return this.setLoadingByKey(key, false).then(() => {
+      return new Promise(resolve => {
+        this.setState(
+          (prevState: LoadStateByKey = initialState) => ({
+            ...prevState,
+            [key]: {
+              ...(prevState[key] || {}),
+              result: null,
+              isError: !!error,
+              error,
+              retry: retryFn,
+            },
+          }),
+          resolve
+        );
+      });
+    });
   };
 
-  private setResultByKey = (key: string, result: any) => {
-    if (!this.mount) return;
-    this.setLoadingByKey(key, false);
-    this.setState((prevState: LoadStateByKey = initialState) => ({
-      ...prevState,
-      [key]: {
-        ...(prevState[key] || {}),
-        error: null,
-        isError: false,
-        result,
-      },
-    }));
+  private setResultByKey = (key: string, result: any): Promise<any> => {
+    if (!this.mount) return Promise.resolve();
+    return this.setLoadingByKey(key, false).then(() => {
+      return new Promise(resolve => {
+        this.setState(
+          (prevState: LoadStateByKey = initialState) => ({
+            ...prevState,
+            [key]: {
+              ...(prevState[key] || {}),
+              error: null,
+              isError: false,
+              result,
+            },
+          }),
+          resolve
+        );
+      });
+    });
   };
 
   private getStateByKey = (key: string): LoadState => {
