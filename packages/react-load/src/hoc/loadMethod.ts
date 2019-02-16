@@ -15,20 +15,31 @@ export default function loadMethod(key: string = K_DEFAULT_KEY) {
         const { setLoadingByKey, setErrorByKey, setResultByKey } = this.props.load;
         setLoadingByKey(key, true);
         log('LOAD METHOD', 'execute');
-        return Promise.resolve(decoratedFn.apply(this, args))
-          .then(result => {
-            log('LOAD METHOD', 'done');
-            setResultByKey(key, result);
-            resolve(result);
-          })
-          .catch(error => {
-            log('LOAD METHOD', 'error');
-            const retryFn = decorateClassMember.bind(this);
-            setErrorByKey(key, error, () => {
-              log('LOAD METHOD', 'retry');
-              return retryFn.apply(this, args);
+        try {
+          return Promise.resolve(decoratedFn.apply(this, args))
+            .then(result => {
+              log('LOAD METHOD', 'done');
+              setResultByKey(key, result);
+              resolve(result);
+            })
+            .catch(error => {
+              log('LOAD METHOD', 'error');
+              const retryFn = decorateClassMember.bind(this);
+              setErrorByKey(key, error, () => {
+                log('LOAD METHOD', 'retry');
+                return retryFn.apply(this, args);
+              });
+              return resolve();
             });
+        } catch (error) {
+          log('LOAD METHOD', 'error');
+          const retryFn = decorateClassMember.bind(this);
+          setErrorByKey(key, error, () => {
+            log('LOAD METHOD', 'retry');
+            return retryFn.apply(this, args);
           });
+          return resolve();
+        }
       });
     };
   });

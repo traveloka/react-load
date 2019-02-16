@@ -108,5 +108,23 @@ describe('test load hoc', () => {
       jest.runAllTimers();
       expect(mockFn).toHaveBeenCalledTimes(2);
     });
+
+    it('isLoading props should be false', () => {
+      class InnerTest extends React.Component {
+        @load()
+        public componentDidMount() {
+          throw Error('test');
+        }
+        public render() {
+          return null;
+        }
+      }
+
+      const Test = load()(InnerTest);
+      const rootInstance = TestRenderer.create(<Test />).root;
+      const testInstance = rootInstance.findByType(InnerTest);
+      expect(testInstance.props.load.isLoading).toEqual(false);
+      expect(testInstance.props.load.isError).toEqual(true);
+    });
   });
 });
