@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.1.7"></a>
+## [0.1.7](https://github.com/traveloka/react-load/compare/v0.1.6...v0.1.7) (2019-02-16)
+
+
+### Bug Fixes
+
+* **hoc:** fixing method hocs throw error ([9c304d3](https://github.com/traveloka/react-load/commit/9c304d3))
+
+
+
+
+
 <a name="0.1.6"></a>
 ## [0.1.6](https://github.com/traveloka/react-load/compare/v0.1.5...v0.1.6) (2019-01-22)
 
