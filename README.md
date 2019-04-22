@@ -1,6 +1,6 @@
 # React Load
 
-![NPM Version](https://badge.fury.io/js/%40traveloka%2Freact-load.svg) [![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield&circle-token=ab2fa2d1fdea74636ee3132e16c82003cdc95383)](https://circleci.com/gh/traveloka/react-load) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+![NPM Version](https://badge.fury.io/js/%40traveloka%2Freact-load.svg) [![CircleCI](https://circleci.com/gh/traveloka/react-load/tree/master.svg?style=shield)](https://circleci.com/gh/traveloka/react-load) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 Remove boilerplate handling loading, error, and result state of Promise!
 
