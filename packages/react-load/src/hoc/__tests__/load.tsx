@@ -2,13 +2,23 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import load from '../load';
 
-describe('test load hoc', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
+function flushPromises() {
+  return new Promise(resolve => {
+    jest.runAllTimers();
+    setImmediate(resolve);
   });
+}
+beforeEach(() => {
+  jest.useFakeTimers();
+});
 
+afterEach(() => {
+  jest.clearAllTimers();
+});
+
+describe('test load hoc', () => {
   describe('test loading function', () => {
-    it('isLoading props should be true', () => {
+    it('isLoading props should be true', async () => {
       class InnerTest extends React.Component {
         @load()
         public componentDidMount() {
@@ -29,14 +39,14 @@ describe('test load hoc', () => {
       expect(testInstance.props.load.isLoading).toEqual(true);
       expect(testInstance.props.load.isError).toEqual(false);
       expect(testInstance.props.load.result).toEqual(null);
-      jest.runAllTimers();
+      await flushPromises();
       expect(testInstance.props.load.isLoading).toEqual(false);
       expect(testInstance.props.load.isError).toEqual(false);
       expect(testInstance.props.load.result).toEqual('hello');
     });
   });
 
-  it('parameters should be correct', () => {
+  it('parameters should be correct', async () => {
     class InnerTest extends React.Component {
       public state: any = {
         value: null,
@@ -64,12 +74,12 @@ describe('test load hoc', () => {
     if (testRef) {
       testInstance.handleOnChangeText('new value');
     }
-    jest.runAllTimers();
+    await flushPromises();
     expect(testInstance.state.value).toEqual('new value');
   });
 
   describe('test error function', () => {
-    it('isLoading props should be true', () => {
+    it('isLoading props should be true', async () => {
       const mockFn = jest.fn();
       class InnerTest extends React.Component {
         @load()
@@ -93,23 +103,23 @@ describe('test load hoc', () => {
       expect(testInstance.props.load.isError).toEqual(false);
       expect(testInstance.props.load.result).toEqual(null);
       expect(mockFn).not.toHaveBeenCalled();
-      jest.runAllTimers();
+      await flushPromises();
       expect(mockFn).toHaveBeenCalled();
       expect(mockFn).toHaveBeenCalledTimes(1);
       expect(testInstance.props.load.isLoading).toEqual(false);
       expect(testInstance.props.load.isError).toEqual(true);
       expect(testInstance.props.load.error).toEqual('error');
       expect(testInstance.props.load.result).toEqual(null);
-      jest.useFakeTimers();
+      await flushPromises();
       testInstance.props.load.retry();
       expect(testInstance.props.load.isLoading).toEqual(true);
       expect(testInstance.props.load.isError).toEqual(false);
       expect(testInstance.props.load.result).toEqual(null);
-      jest.runAllTimers();
+      await flushPromises();
       expect(mockFn).toHaveBeenCalledTimes(2);
     });
 
-    it('isLoading props should be false', () => {
+    it('isLoading props should be false', async () => {
       class InnerTest extends React.Component {
         @load()
         public componentDidMount() {
@@ -123,6 +133,7 @@ describe('test load hoc', () => {
       const Test = load()(InnerTest);
       const rootInstance = TestRenderer.create(<Test />).root;
       const testInstance = rootInstance.findByType(InnerTest);
+      await flushPromises();
       expect(testInstance.props.load.isLoading).toEqual(false);
       expect(testInstance.props.load.isError).toEqual(true);
     });
