@@ -14,7 +14,7 @@ Remove boilerplate handling loading, error, and result state of Promise!
       - [Setup](#setup)
   - [Motivation](#motivation)
     - [Hooks](#hooks)
-      - [- useLoad()](#useload)
+      - [useLoad()](#useload)
     - [Example](#example)
   - [Documentations](#documentations)
       - [Given Props](#given-props)
@@ -53,7 +53,7 @@ This library will give a property state before and after execution of async func
 
 
 ### Hooks
-#### - useLoad()
+#### useLoad()
 ```typescript
 const {
   isLoading: boolean,
