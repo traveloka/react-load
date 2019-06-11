@@ -13,6 +13,8 @@ Remove boilerplate handling loading, error, and result state of Promise!
   - [How to use](#how-to-use)
       - [Setup](#setup)
   - [Motivation](#motivation)
+    - [Hooks](#hooks)
+      - [- useLoad()](#useload)
     - [Example](#example)
   - [Documentations](#documentations)
       - [Given Props](#given-props)
@@ -50,9 +52,41 @@ In ES6, there's a [Promise](https://www.datchley.name/es6-promises/) that do som
 This library will give a property state before and after execution of async function.
 
 
+### Hooks
+#### - useLoad()
+```typescript
+const {
+  isLoading: boolean,
+  isError: boolean,
+  error: Error | null,
+  retry: () => void,
+  result: T | null,
+  trigger: (...args: any[]) => Promise<T>
+} = useLoad<T>((...args: any[]) => Promise<T>)
+
+```
+Example
+```javascript
+import React, { useEffect } from 'react';
+import { useLoad } from '@traveloka/react-load';
+
+export default function UserListPage(props) {
+  const { isLoading, isError, error, retry, result, trigger } = useLoad(fetchUserList);
+  useEffect(() => {
+    trigger(); // call the fetchUserList that wrapped with load attributes
+  });
+  if (isLoading) return <LoadingPage />
+  if (isError) return <ErrorPage error={error} retry={retry} />
+  return (
+    ....
+  );
+}
+```
+
 ### Example
 
 [![Example 1](https://i.imgur.com/BHQnV3N.png)](https://codesandbox.io/s/nrn3opw66j)
+
 [![Example 2](https://i.imgur.com/s5YPdDB.png)](https://codesandbox.io/s/71myqxl1lx)
 
 - With decorator
