@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/Jekiwijaya/react-load/compare/v0.1.7...v0.2.0) (2019-06-11)
+
+
+### Bug Fixes
+
+* readme ([e9c1eaf](https://github.com/Jekiwijaya/react-load/commit/e9c1eaf))
+
+
+### Features
+
+* support hooks, useLoad ([7e5c7fb](https://github.com/Jekiwijaya/react-load/commit/7e5c7fb))
+
+
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/Jekiwijaya/react-load/compare/v0.1.6...v0.1.7) (2019-02-16)
 

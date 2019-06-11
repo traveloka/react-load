@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/traveloka/react-load/compare/v0.1.7...v0.2.0) (2019-06-11)
+
+
+### Features
+
+* support hooks, useLoad ([7e5c7fb](https://github.com/traveloka/react-load/commit/7e5c7fb))
+
+
+
+
+
 <a name="0.1.7"></a>
 ## [0.1.7](https://github.com/traveloka/react-load/compare/v0.1.6...v0.1.7) (2019-02-16)
 
