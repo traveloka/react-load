@@ -16,6 +16,8 @@ Remove boilerplate handling loading, error, and result state of Promise!
     - [Hooks](#hooks)
       - [useLoad()](#useload)
     - [Example](#example)
+      - [Hooks](#hooks-1)
+      - [HOC](#hoc)
   - [Documentations](#documentations)
       - [Given Props](#given-props)
   - [How to (not) use decorators](#how-to-not-use-decorators)
@@ -74,7 +76,7 @@ export default function UserListPage(props) {
   const { isLoading, isError, error, retry, result, trigger } = useLoad(fetchUserList);
   useEffect(() => {
     trigger(); // call the fetchUserList that wrapped with load attributes
-  });
+  }, []); // only trigger componentDidMount
   if (isLoading) return <LoadingPage />
   if (isError) return <ErrorPage error={error} retry={retry} />
   return (
@@ -85,9 +87,14 @@ export default function UserListPage(props) {
 
 ### Example
 
+#### Hooks
+[![Example 1](https://i.imgur.com/s5YPdDB.png)](https://codesandbox.io/s/react-native-uv5q6)
+
+#### HOC
 [![Example 1](https://i.imgur.com/BHQnV3N.png)](https://codesandbox.io/s/nrn3opw66j)
 
 [![Example 2](https://i.imgur.com/s5YPdDB.png)](https://codesandbox.io/s/71myqxl1lx)
+
 
 - With decorator
 
