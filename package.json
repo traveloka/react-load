@@ -12,10 +12,6 @@
     "publish:git": "lerna publish --conventional-commits --yes --skip-npm",
     "publish:npm": "lerna exec npm publish --since HEAD^"
   },
-  "dependencies": {
-    "lerna": "^3.0.0-rc.0",
-    "typescript": "^3.0.1"
-  },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
@@ -31,6 +27,7 @@
     "@types/jest": "^23.3.1",
     "@types/node": "^10.12.12",
     "cz-conventional-changelog": "^2.1.0",
+    "lerna": "^3.22.1",
     "ts-jest": "20.0.14",
     "typescript": "^3.0.1"
   }
