@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1-alpha.0](https://github.com/traveloka/react-load/compare/v0.2.0...v0.2.1-alpha.0) (2021-02-22)
+
+**Note:** Version bump only for package @traveloka/react-load
+
+
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/Jekiwijaya/react-load/compare/v0.1.7...v0.2.0) (2019-06-11)
 
